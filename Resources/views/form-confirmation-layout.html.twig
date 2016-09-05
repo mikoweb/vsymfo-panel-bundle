@@ -1,0 +1,9 @@
+{% extends "PanelBundle::form-layout.html.twig" %}
+
+{% block form_fields %}
+    {% block form_confirmation_info %}{% endblock %}
+    <fieldset class="btn-group" role="group">
+        {{ form_widget(form.confirm, {'attr': {'class': 'btn btn-success'}}) }}
+        {{ form_widget(form.cancel, {'attr': {'class': 'btn btn-default'}}) }}
+    </fieldset>
+{% endblock %}

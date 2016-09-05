@@ -1,0 +1,25 @@
+{% extends "::theme.html.twig" %}
+
+{% block content %}
+    {% include "PanelBundle:include:breadcrumb.html.twig" %}
+    {% block list_messages %}
+        {% include "PanelBundle:include:messages.html.twig" %}
+    {% endblock %}
+    {% block list_toolbar %}{% endblock %}
+    <section class="card">
+        <header class="card-header">
+            {% block list_head %}{% endblock %}
+            {% block list_head_button %}{% endblock %}
+        </header>
+        {% block list_content %}{% endblock %}
+        {% block list_pagination %}
+            {% if pagination.getPageCount() > 1 %}
+            <nav class="text-xs-center" role="navigation">
+                {{ knp_pagination_render(pagination) }}
+            </nav>
+            {% endif %}
+        {% endblock %}
+    </section>
+{% endblock %}
+
+{% block list_item_actions %}{% endblock %}
