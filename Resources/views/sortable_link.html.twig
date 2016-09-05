@@ -1,0 +1,10 @@
+<a href="{{ options.href }}">
+    <span>{{ title }}</span>
+    {% if sorted %}
+    {% if direction == 'asc' %}
+    <span class="fa fa-sort-alpha-desc"></span>
+    {% else %}
+    <span class="fa fa-sort-alpha-asc"></span>
+    {% endif %}
+    {% endif %}
+</a>
