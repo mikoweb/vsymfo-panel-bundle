@@ -1,3 +1,11 @@
 global:
     confirm: Potwierdź
     cancel: Anuluj
+    buttons:
+        edit: Edytuj
+        remove: Usuń
+        lock: Zablokuj
+        unlock: Odblokuj
+        create: Utwórz
+        save: Zapisz
+        back: Powrót

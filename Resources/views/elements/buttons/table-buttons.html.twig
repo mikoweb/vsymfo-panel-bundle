@@ -1,0 +1,19 @@
+{%- macro btn_edit(role, href, attrs) -%}
+    {% import "PanelBundle:elements/buttons:buttons.html.twig" as buttons %}
+    {{ buttons.btn_role(role, href, null, 'btn btn-default btn-sm', 'fa fa-edit', 'global.buttons.edit'|trans, null, attrs) }}
+{%- endmacro -%}
+
+{%- macro btn_remove(role, href, attrs) -%}
+    {% import "PanelBundle:elements/buttons:buttons.html.twig" as buttons %}
+    {{ buttons.btn_role(role, href, null, 'btn btn-danger btn-sm', 'fa fa-remove', 'global.buttons.remove'|trans, null, attrs) }}
+{%- endmacro -%}
+
+{%- macro btn_lock(role, href, attrs) -%}
+    {% import "PanelBundle:elements/buttons:buttons.html.twig" as buttons %}
+    {{ buttons.btn_role(role, href, null, 'btn btn-danger btn-sm', 'fa fa-lock', 'global.buttons.lock'|trans, null, attrs) }}
+{%- endmacro -%}
+
+{%- macro btn_unlock(role, href, attrs) -%}
+    {% import "PanelBundle:elements/buttons:buttons.html.twig" as buttons %}
+    {{ buttons.btn_role(role, href, null, 'btn btn-success btn-sm', 'fa fa-unlock', 'global.buttons.unlock'|trans, null, attrs) }}
+{%- endmacro -%}

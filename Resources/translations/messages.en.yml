@@ -1,3 +1,11 @@
 global:
     confirm: Confirm
     cancel: Cancel
+    buttons:
+        edit: Edit
+        remove: Remove
+        lock: Lock
+        unlock: Unlock
+        create: Create
+        save: Save
+        back: Back

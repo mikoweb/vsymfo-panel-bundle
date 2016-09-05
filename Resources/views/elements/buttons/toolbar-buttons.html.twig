@@ -1,0 +1,18 @@
+{%- macro btn_new(role, href, attrs) -%}
+    {% import "PanelBundle:elements/buttons:buttons.html.twig" as buttons %}
+    {{ buttons.btn_role(role, href, 'global.buttons.create'|trans, 'btn btn-success', 'fa fa-plus-circle', null, null, attrs) }}
+{%- endmacro -%}
+
+{%- macro btn_save(attrs) -%}
+    {% import "PanelBundle:elements/buttons:buttons.html.twig" as buttons %}
+    {% set element_attrs = {'type': 'submit'} %}
+    {% if attrs is iterable %}
+        {% set element_attrs = element_attrs|merge(attrs) %}
+    {% endif %}
+    {{ buttons.btn(null, 'global.buttons.save'|trans, 'btn btn-success', 'fa fa-floppy-o', null, null, element_attrs) }}
+{%- endmacro -%}
+
+{%- macro btn_back(role, href, attrs) -%}
+    {% import "PanelBundle:elements/buttons:buttons.html.twig" as buttons %}
+    {{ buttons.btn_role(role, href, 'global.buttons.back'|trans, 'btn btn-danger', 'fa fa-level-up', null, null, attrs) }}
+{%- endmacro -%}

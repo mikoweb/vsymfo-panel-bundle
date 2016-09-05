@@ -1,0 +1,59 @@
+{#
+ # Universal button.
+ #
+ # @param string [href]
+ # @param string [text]
+ # @param string [class]
+ # @param string [iconClass]
+ # @param string [title]
+ # @param string [iconLabel]
+ # @param array [iconLabel]
+ #}
+{%- macro btn(href, text, class, iconClass, title, iconLabel, attrs) -%}
+{% spaceless %}
+    {%- set icon -%}
+        {%- if iconClass is not empty -%}
+            <span class="{{ iconClass }}"{% if iconLabel is not empty %} aria-label="{{ iconLabel }}"{% else %} aria-hidden="true"{% endif %}></span>
+        {%- endif -%}
+    {%- endset -%}
+    {% set attributes = {
+        'href': href,
+        'class': class,
+        'title': title
+    } %}
+    {% if attrs is iterable %}
+        {% set attributes = attributes|merge(attrs) %}
+    {% endif %}
+    {% set element_attrs = '' %}
+    {% for attr, val in attributes %}
+        {% if val is same as(true) %}
+            {% set element_attrs = element_attrs ~ ' ' ~ attr %}
+        {% elseif val is not empty %}
+            {% set element_attrs = element_attrs ~ ' ' ~ attr ~ '="' ~ val ~ '"' %}
+        {% endif %}
+    {% endfor %}
+    {% if href is empty %}
+        <button{{ element_attrs|raw }}>{{ (icon is empty ? '' : icon ~ ' ')|raw }}{{ text }}</button>
+    {% else %}
+        <a{{ element_attrs|raw }}>{{ (icon is empty ? '' : icon ~ ' ')|raw }}{{ text }}</a>
+    {% endif %}
+{% endspaceless %}
+{%- endmacro -%}
+
+{#
+ # Universal button with limited access.
+ #
+ # @param string role
+ # @param string [href]
+ # @param string [text]
+ # @param string [class]
+ # @param string [iconClass]
+ # @param string [title]
+ # @param string [iconLabel]
+ # @param array [iconLabel]
+ #}
+{%- macro btn_role(role, href, text, class, iconClass, title, iconLabel, attrs) -%}
+    {%- if role is null or is_granted(role) -%}
+        {{ _self.btn(href, text, class, iconClass, title, iconLabel, attrs) }}
+    {%- endif -%}
+{%- endmacro -%}
