@@ -1,0 +1,21 @@
+{
+    "name": "mikoweb/vsymfo-panel-bundle",
+    "type": "symfony-bundle",
+    "description": "vSymfo Panel Bundle",
+    "license": "LGPLv3",
+    "authors": [
+        {
+            "name": "Rafał Mikołajun",
+            "email": "rafal@mikoweb.pl",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9"
+    },
+    "autoload": {
+        "psr-4": { "vSymfo\\Bundle\\PanelBundle\\": "" }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
