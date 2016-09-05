@@ -1,1 +1,5 @@
-services: ~
+services:
+    vsymfo_panel.form.type.confirmation:
+         class: vSymfo\Bundle\PanelBundle\Form\Type\ConfirmationFormType
+         tags:
+            - { name: form.type }
