@@ -1,0 +1,54 @@
+{% if pageCount > 1 %}
+    <ul class="pagination">
+        {% if first is defined and current != first %}
+        <li class="page-item first">
+            <a class="page-link" href="{{ path(route, query|merge({(pageParameterName): first})) }}"><span class="fa fa-angle-double-left" aria-label="First"></span></a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link fa fa-angle-double-left" aria-label="First"></span>
+        </li>
+        {% endif %}
+
+        {% if previous is defined %}
+        <li class="page-item previous">
+            <a class="page-link" href="{{ path(route, query|merge({(pageParameterName): previous})) }}"><span class="fa fa-angle-left" aria-label="Prev"></span></a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link fa fa-angle-left" aria-label="Prev"></span>
+        </li>
+        {% endif %}
+
+        {% for page in pagesInRange %}
+            {% if page != current %}
+            <li class="page-item page">
+                <a class="page-link" href="{{ path(route, query|merge({(pageParameterName): page})) }}">{{ page }}</a>
+            </li>
+            {% else %}
+            <li class="page-item active"><span class="page-link">{{ page }}</span></li>
+            {% endif %}
+
+        {% endfor %}
+
+        {% if next is defined %}
+        <li class="page-item next">
+            <a class="page-link" href="{{ path(route, query|merge({(pageParameterName): next})) }}"><span class="fa fa-angle-right" aria-label="Next"></span></a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link fa fa-angle-right" aria-label="Next"></span>
+        </li>
+        {% endif %}
+
+        {% if last is defined and current != last %}
+        <li class="page-item last">
+            <a class="page-link" href="{{ path(route, query|merge({(pageParameterName): last})) }}"><span class="fa fa-angle-double-right"  aria-label="Last"></span></a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link fa fa-angle-double-right" aria-label="Last"></span>
+        </li>
+        {% endif %}
+    </ul>
+{% endif %}
