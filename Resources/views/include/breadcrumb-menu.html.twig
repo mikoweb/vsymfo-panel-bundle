@@ -1,0 +1,33 @@
+{% extends 'knp_menu.html.twig' %}
+
+{%- block list -%}
+{{ block('children') }}
+{%- endblock -%}
+
+{%- block item -%}
+    {% if matcher.isCurrent(item) %}
+        {% set breadcrumbs = knp_menu_get_breadcrumbs_array(item) %}
+        <ol class="breadcrumb breadcrumb--no-margin">
+            {% for breadcrumb in breadcrumbs %}
+                {% if loop.first %}
+                    <li class="nav-item">
+                        <a href="{{ path('panel_index') }}">
+                            <i class="fa fa-home" aria-label="Home"></i>
+                        </a>
+                    </li>
+                {% elseif loop.last %}
+                    <li class="active">{{ breadcrumb.label }}</li>
+                {% else %}
+                    {% if breadcrumb.uri %}
+                    <li>
+                        <a href="{{ breadcrumb.uri }}">{{ breadcrumb.label }}</a>
+                    </li>
+                    {% else %}
+                    <li class="active">{{ breadcrumb.label }}</li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </ol>
+    {% endif %}
+    {{ block('list') }}
+{%- endblock -%}
