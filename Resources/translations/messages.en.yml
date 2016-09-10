@@ -9,3 +9,7 @@ global:
         create: Create
         save: Save
         back: Back
+
+panel:
+    account_button: Account
+    logout: Logout
