@@ -1,6 +1,13 @@
 global:
+    action: Akcja
+    actions: Akcje
     confirm: Potwierdź
     cancel: Anuluj
+    filter: Filtruj
+    all: Wszystko
+    yes: Tak
+    no: Nie
+    clear: Wyczyść
     buttons:
         edit: Edytuj
         remove: Usuń
@@ -9,6 +16,12 @@ global:
         create: Utwórz
         save: Zapisz
         back: Powrót
+
+roles:
+    names:
+        role_panel_access: Dostęp do panelu
+    tags:
+        panel: Panel
 
 panel:
     account_button: Konto

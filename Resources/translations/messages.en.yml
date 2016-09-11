@@ -1,6 +1,13 @@
 global:
+    action: Action
+    actions: Actions
     confirm: Confirm
     cancel: Cancel
+    filter: Filter
+    all: All
+    yes: Yes
+    no: No
+    clear: Clear
     buttons:
         edit: Edit
         remove: Remove
@@ -9,6 +16,12 @@ global:
         create: Create
         save: Save
         back: Back
+
+roles:
+    names:
+        role_panel_access: Access to panel
+    tags:
+        panel: Panel
 
 panel:
     account_button: Account
