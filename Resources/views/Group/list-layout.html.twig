@@ -1,0 +1,56 @@
+{% extends "PanelBundle::list-layout.html.twig" %}
+
+{% import "@Panel/elements/buttons/toolbar-buttons.html.twig" as toolbar_buttons %}
+{% import "@Panel/elements/buttons/table-buttons.html.twig" as table_buttons %}
+{% import "@Panel/elements/tables/tables.html.twig" as tables %}
+
+{% block list_toolbar %}
+    <div class="btn-group--before-card" role="group">
+        {{ toolbar_buttons.btn_new('ROLE_NEW_GROUP', path('panel_group_create')) }}
+    </div>
+{% endblock %}
+
+{% block list_content %}
+    {{ tables.table_open }}
+    <thead>
+    <tr>
+        <th class="th--tight text-xs-center">{{ 'groups.fields.id'|trans }}</th>
+        <th class="th--tight">{{ 'global.action'|trans }}</th>
+        <th>{{ 'groups.fields.name'|trans }}</th>
+    </tr>
+    </thead>
+    {{ tables.tbody_open }}
+    {% for group in groups %}
+        <tr>
+            <td>{{ group.id }}</td>
+            <td>{{ block('list_item_actions') }}</td>
+            <td>
+                {% set count = count_users['group_' ~ group.id].users %}
+                {% if count %}
+                    <a href="{{ path('panel_user_index', {'filter[group]': group.id}) }}">
+                        <span>{{ group.name|trans }}</span>
+                        <span class="label label-pill label-primary">{{ count }}</span>
+                    </a>
+                {% else %}
+                    <span>{{ group.name|trans }}</span>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    {{ tables.tbody_close }}
+    {{ tables.table_close }}
+{% endblock %}
+
+{% block list_pagination %}
+    {% set pagination = groups %}
+    {{ parent() }}
+{% endblock %}
+
+{% block list_item_actions %}
+    <div class="btn-group btn-group-td" role="group" aria-label="{{ 'global.action'|trans }}">
+        {{ table_buttons.btn_edit('ROLE_EDIT_GROUP', path('panel_group_edit', {'id': group.id})) }}
+        {% if is_granted('group_remove_access', group) and not count_users['group_' ~ group.id].users %}
+            {{ table_buttons.btn_remove(null, path('panel_group_destroy', {'id': group.id})) }}
+        {% endif %}
+    </div>
+{% endblock %}

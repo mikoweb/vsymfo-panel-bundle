@@ -1,0 +1,75 @@
+{% extends "PanelBundle::list-layout.html.twig" %}
+
+{% import "@Panel/elements/buttons/buttons.html.twig" as buttons %}
+{% import "@Panel/elements/buttons/toolbar-buttons.html.twig" as toolbar_buttons %}
+{% import "@Panel/elements/buttons/table-buttons.html.twig" as table_buttons %}
+{% import "@Panel/elements/tables/tables.html.twig" as tables %}
+
+{% block list_toolbar %}
+    <div class="card">
+        <div class="card-block">
+            {{ form_start(form, {'style': 'inline'}) }}
+            {{ form_rest(form) }}
+            <div class="btn-group">
+                {{ buttons.btn(null, null, 'btn btn-primary', 'fa fa-filter', 'global.filter'|trans, null, {'type': 'submit'}) }}
+                {{ buttons.btn(path('panel_user_index'), null, 'btn btn-default', 'fa fa-times', 'global.clear'|trans) }}
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+    <div class="btn-group--before-card" role="group">
+        {{ toolbar_buttons.btn_new('ROLE_NEW_USER', path('panel_user_create')) }}
+        {{ buttons.btn_role('ROLE_LIST_GROUP', path('panel_group_index'), 'users.fields.groups'|trans, 'btn btn-default', 'fa fa-users') }}
+        {% set selectedType = form.type.vars.value %}
+        {{ buttons.btn(path('panel_user_index', {'filter[type]': 'groups.types.user'}), 'groups.types.user'|trans, 'btn btn-default' ~ (selectedType == 'groups.types.user' ? ' disabled' : ''), 'fa fa-user') }}
+        {{ buttons.btn(path('panel_user_index', {'filter[type]': 'groups.types.employee'}), 'groups.types.employee'|trans, 'btn btn-default' ~ (selectedType == 'groups.types.employee' ? ' disabled' : ''), 'fa fa-suitcase') }}
+    </div>
+{% endblock %}
+
+{% block list_content %}
+    {{ tables.table_open }}
+    <thead>
+    <tr>
+        <th class="th--tight text-xs-center">{{ knp_pagination_sortable(users, 'users.fields.id'|trans, 'u.id') }}</th>
+        <th class="th--tight">{{ 'global.actions'|trans }}</th>
+        <th>{{ knp_pagination_sortable(users, 'users.fields.name'|trans, 'u.username') }}</th>
+        <th>{{ knp_pagination_sortable(users, 'users.fields.fullname'|trans, 'u.fullname') }}</th>
+        <th>{{ knp_pagination_sortable(users, 'users.fields.email'|trans, 'u.email') }}</th>
+        <th>{{ 'users.fields.groups'|trans }}</th>
+    </tr>
+    </thead>
+    {{ tables.tbody_open }}
+    {% for user in users %}
+        <tr>
+            <td class="text-xs-center">{{ user.id }}</td>
+            <td>{{ block('list_item_actions') }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.invertFullName }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+                {% for group in user.groups %}
+                    <a href="{{ path('panel_user_index', {'filter[group]': group.id}) }}">{{ group.name|trans }}</a>{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+    {% endfor %}
+    {{ tables.tbody_close }}
+    {{ tables.table_close }}
+{% endblock %}
+
+{% block list_pagination %}
+    {% set pagination = users %}
+    {{ parent() }}
+{% endblock %}
+
+{% block list_item_actions %}
+    <div class="btn-group btn-group-td" role="group" aria-label="{{ 'global.action'|trans }}">
+        {{ table_buttons.btn_edit('ROLE_EDIT_USER', path('panel_user_edit', {'id': user.id})) }}
+        {% if is_granted('user_unlock_access', user) %}
+            {{ table_buttons.btn_unlock(null, path('panel_user_unlock', {'id': user.id})) }}
+        {% endif %}
+        {% if is_granted('user_lock_access', user) %}
+            {{ table_buttons.btn_lock(null, path('panel_user_lock', {'id': user.id})) }}
+        {% endif %}
+    </div>
+{% endblock %}

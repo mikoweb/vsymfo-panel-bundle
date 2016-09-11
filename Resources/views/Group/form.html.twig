@@ -1,0 +1,10 @@
+{% extends "PanelBundle::form-layout.html.twig" %}
+
+{% import "@Panel/elements/buttons/toolbar-buttons.html.twig" as toolbar_buttons %}
+
+{% block form_toolbar %}
+    <div class="btn-group--before-card" role="group">
+        {{ toolbar_buttons.btn_save }}
+        {{ toolbar_buttons.btn_back('ROLE_LIST_GROUP', path('panel_group_index')) }}
+    </div>
+{% endblock %}

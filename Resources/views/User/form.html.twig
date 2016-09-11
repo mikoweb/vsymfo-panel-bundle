@@ -1,0 +1,15 @@
+{% extends "PanelBundle::form-layout.html.twig" %}
+
+{% import "@Panel/elements/buttons/toolbar-buttons.html.twig" as toolbar_buttons %}
+
+{% block form_content %}
+    {% set form_start_variables = {'attr': {'autocomplete': 'off'}} %}
+    {{ parent() }}
+{% endblock %}
+
+{% block form_toolbar %}
+    <div class="btn-group--before-card" role="group">
+        {{ toolbar_buttons.btn_save }}
+        {{ toolbar_buttons.btn_back('ROLE_LIST_USER', path('panel_user_index')) }}
+    </div>
+{% endblock %}

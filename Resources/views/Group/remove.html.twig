@@ -1,0 +1,9 @@
+{% extends "PanelBundle::form-confirmation-layout.html.twig" %}
+
+{% block form_head %}
+    <h2 class="card-title">{{ 'groups.form.title_remove'|trans }}</h2>
+{% endblock %}
+
+{% block form_confirmation_info %}
+    <p>{{ 'groups.remove_confirmation'|trans({'%group_name%': group.name}) }}</p>
+{% endblock %}
