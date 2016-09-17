@@ -1,7 +1,15 @@
 {% extends 'knp_menu.html.twig' %}
 
 {%- block linkElement -%}
-    <a href="{{ item.uri }}"{{ knp_menu.attributes(item.linkAttributes|merge({'class': 'sidebar-menu-button'})) }}>
+    {% set attrs = item.linkAttributes|merge({'class': 'sidebar-menu-button'}) %}
+    {% set count = 0 %}
+    {%- for child in item.children -%}
+        {%- if child.extras.hidden is not defined or not child.extras.hidden -%}{% set count = count + 1 %}{% endif %}
+    {%- endfor -%}
+    {%- if count > 0 -%}
+        {% set attrs = attrs|merge({'data-toggle': 'sidebar-collapse'}) %}
+    {%- endif -%}
+    <a href="{{ item.uri }}"{{ knp_menu.attributes(attrs) }}>
         {% if item.extras.icon_class is defined %}<i class="sidebar-menu-icon {{ item.extras.icon_class }}" aria-hidden="true"></i>{{ ' ' }}{% endif %}{{ block('label') }}
     </a>
 {%- endblock -%}
@@ -26,7 +34,7 @@
         {%- if child.extras.hidden is not defined or not child.extras.hidden -%}{% set count = count + 1 %}{% endif %}
     {%- endfor -%}
     {%- if count > 0 -%}
-    <ul {% if item.parent is null %}class="sidebar-menu sm-active-button-bg" data-toggle="sidebar-collapse"{% else %}class="sidebar-submenu"{% endif %}>
+    <ul {% if item.parent is null %}class="sidebar-menu sm-active-button-bg"{% else %}class="sidebar-submenu"{% endif %}>
         {{ block('children') }}
     </ul>
     {%- endif -%}
