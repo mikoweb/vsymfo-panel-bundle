@@ -14,5 +14,5 @@
 
 {%- macro btn_back(role, href, attrs) -%}
     {% import "PanelBundle:elements/buttons:buttons.html.twig" as buttons %}
-    {{ buttons.btn_role(role, href, 'global.buttons.back'|trans, 'btn btn-danger', 'fa fa-level-up', null, null, attrs) }}
+    {{ buttons.btn_role(role, href, 'global.buttons.back'|trans, 'btn btn-secondary', 'fa fa-level-up', null, null, attrs) }}
 {%- endmacro -%}
