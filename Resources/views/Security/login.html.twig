@@ -4,11 +4,11 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% block body_attributes %} class="login_screen"{% endblock %}
+
 {% block body %}
-    <section class="card card_login">
-        <header class="card-header text-xs-center bg-primary">
-            <h2 class="card-title">Virtus</h2>
-        </header>
+    <i class="login_layer" aria-hidden="true"></i>
+    <main class="card card_login">
         <div class="card-block">
             {% if error %}
                 {{ alert.alert(error.messageKey|trans(error.messageData, 'security'), 'alert-danger', true) }}
@@ -22,12 +22,13 @@
                     <label for="password">{{ 'security.login.password'|trans }}</label>
                     <input class="form-control" type="password" id="password" name="_password" required="required" />
                 </div>
-                <button class="btn btn-default btn-block btn-lg" type="submit" id="_submit" name="_submit">
+                <button class="btn btn-sign-in btn-block btn-lg" type="submit" id="_submit" name="_submit">
                     <i class="fa fa-sign-in" aria-hidden="true"></i>
                     {{ 'security.login.submit'|trans }}
                 </button>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
             </form>
         </div>
-    </section>
+        <footer class="card_login_footer">Virtus Symfony CMF</footer>
+    </main>
 {% endblock %}
