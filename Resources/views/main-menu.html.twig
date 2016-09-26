@@ -15,7 +15,15 @@
 {%- endblock -%}
 
 {%- block spanElement -%}
-    <span{{ knp_menu.attributes(item.labelAttributes|merge({'class': 'sidebar-menu-button'})) }}>
+    {% set attrs = item.labelAttributes|merge({'class': 'sidebar-menu-button'}) %}
+    {% set count = 0 %}
+    {%- for child in item.children -%}
+        {%- if child.extras.hidden is not defined or not child.extras.hidden -%}{% set count = count + 1 %}{% endif %}
+    {%- endfor -%}
+    {%- if count > 0 -%}
+        {% set attrs = attrs|merge({'data-toggle': 'sidebar-collapse'}) %}
+    {%- endif -%}
+    <span{{ knp_menu.attributes(attrs) }}>
         {% if item.extras.icon_class is defined %}<i class="sidebar-menu-icon {{ item.extras.icon_class }}" aria-hidden="true"></i>{{ ' ' }}{% endif %}{{ block('label') }}
     </span>
 {%- endblock -%}
