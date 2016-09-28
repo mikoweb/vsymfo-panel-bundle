@@ -3,3 +3,6 @@ services:
          class: vSymfo\Bundle\PanelBundle\Form\Type\ConfirmationFormType
          tags:
             - { name: form.type }
+
+    vsymfo_panel.service.form_builder:
+        class: vSymfo\Bundle\PanelBundle\Service\FormBuilderService
