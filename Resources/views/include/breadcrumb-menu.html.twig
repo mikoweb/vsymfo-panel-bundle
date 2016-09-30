@@ -10,11 +10,7 @@
         <ol class="breadcrumb breadcrumb--no-margin">
             {% for breadcrumb in breadcrumbs %}
                 {% if loop.first %}
-                    <li class="nav-item">
-                        <a href="{{ path('panel_index') }}">
-                            <i class="fa fa-home" aria-label="Home"></i>
-                        </a>
-                    </li>
+                    {% include "PanelBundle:include:breadcrumb-home-icon.html.twig" %}
                 {% elseif loop.last %}
                     <li class="active">{{ breadcrumb.label }}</li>
                 {% else %}
