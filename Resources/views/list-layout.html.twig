@@ -8,6 +8,7 @@
         {% include "PanelBundle:include:messages.html.twig" %}
     {% endblock %}
     {% block list_toolbar %}{% endblock %}
+    {% block list_section %}
     <section class="card">
         <header class="card-header">
             {% block list_head %}{% endblock %}
@@ -22,6 +23,7 @@
             {% endif %}
         {% endblock %}
     </section>
+    {% endblock %}
 {% endblock %}
 
 {% block list_item_actions %}{% endblock %}
