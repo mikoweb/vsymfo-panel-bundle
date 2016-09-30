@@ -1,7 +1,9 @@
 {% extends "::theme.html.twig" %}
 
 {% block content %}
-    {% include "PanelBundle:include:breadcrumb.html.twig" %}
+    <nav class="card-block card-block--no-padding-top">
+    {% block breadcrumb %}{% include "PanelBundle:include:breadcrumb.html.twig" %}{% endblock %}
+    </nav>
     {% block form_messages %}
         {% include "PanelBundle:include:messages.html.twig" %}
         {% if not form.vars.valid and form.vars.errors.count %}
