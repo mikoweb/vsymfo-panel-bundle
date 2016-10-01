@@ -64,7 +64,11 @@ class Crud extends BaseCrud
                 $this->dispatch($dispatcher, self::EVENT_REMOVE_CONFIRMED, $data);
                 return $data;
             } else {
-                $data->setResponse($this->redirectToRoute($this->indexRoute()));
+                if (empty($options['redirect_cancel_url'])) {
+                    $data->setResponse($this->redirectToRoute($this->indexRoute()));
+                } else {
+                    $data->setResponse($this->redirect($options['redirect_cancel_url']));
+                }
                 $this->dispatch($dispatcher, self::EVENT_REMOVE_CANCEL, $data);
             }
         }
