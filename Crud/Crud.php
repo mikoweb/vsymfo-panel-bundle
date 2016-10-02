@@ -43,7 +43,7 @@ class Crud extends BaseCrud
     {
         $options = $this->commonOptionsResolver()->resolve($options);
         $data = new Data();
-        $entity = $this->getManager()->findEntity($request);
+        $entity = $this->getEntity($request, $options);
         $data->setEntity($entity);
         $form = $this->container->get('form.factory')
             ->createBuilder(ConfirmationFormType::class, null, [
@@ -60,6 +60,7 @@ class Crud extends BaseCrud
 
         if ($form->isValid() && $form->isSubmitted()) {
             if ($form->get('confirm')->isClicked()) {
+                $options['entity'] = $entity;
                 $data = parent::destroy($request, $options);
                 $this->dispatch($dispatcher, self::EVENT_REMOVE_CONFIRMED, $data);
                 return $data;
