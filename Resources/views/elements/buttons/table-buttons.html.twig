@@ -5,7 +5,7 @@
 
 {%- macro btn_remove(role, href, attrs) -%}
     {% import "PanelBundle:elements/buttons:buttons.html.twig" as buttons %}
-    {{ buttons.btn_role(role, href, null, 'btn btn-danger btn-sm', 'fa fa-remove', 'global.buttons.remove'|trans, null, attrs) }}
+    {{ buttons.btn_role(role, href, null, 'btn btn-danger btn-sm', 'fa fa-trash', 'global.buttons.remove'|trans, null, attrs) }}
 {%- endmacro -%}
 
 {%- macro btn_lock(role, href, attrs) -%}
