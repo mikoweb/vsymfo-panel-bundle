@@ -21,7 +21,7 @@
     </thead>
     {{ tables.tbody_open }}
     {% for group in groups %}
-        <tr>
+        <tr data-row-url="{{ path('panel_group_edit', {'id': group.id}) }}">
             <td>{{ group.id }}</td>
             <td>{{ block('list_item_actions') }}</td>
             <td>

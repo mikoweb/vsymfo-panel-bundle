@@ -40,7 +40,7 @@
     </thead>
     {{ tables.tbody_open }}
     {% for user in users %}
-        <tr>
+        <tr data-row-url="{{ path('panel_user_edit', {'id': user.id}) }}">
             <td class="text-xs-center">{{ user.id }}</td>
             <td>{{ block('list_item_actions') }}</td>
             <td>{{ user.username }}</td>
