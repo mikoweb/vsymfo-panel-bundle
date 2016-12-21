@@ -12,7 +12,7 @@
 
 namespace vSymfo\Bundle\PanelBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller as BaseController;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
  * @package vSymfo Panel Bundle
  * @subpackage Controller
  */
-class ExceptionController extends Controller
+class ExceptionController extends BaseController
 {
     /**
      * @return Response
