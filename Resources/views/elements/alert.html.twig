@@ -31,12 +31,13 @@
  * @var string btnCloseText | content of close button
  #}
 {% macro alert_flashbag(flashbagName, class, dismissible, btnCloseText) %}
+    {% import _self as alerts %}
     {% set flashbag = app.session.flashbag.get(flashbagName) %}
     {% if flashbag is not empty %}
         {% set message = '' %}
         {% for flashMessage in flashbag %}
             {% set message = message ~ '<p>' ~ flashMessage ~ '</p>' %}
         {% endfor %}
-        {{ _self.alert(message, class, dismissible, btnCloseText) }}
+        {{ alerts.alert(message, class, dismissible, btnCloseText) }}
     {% endif %}
 {% endmacro %}
