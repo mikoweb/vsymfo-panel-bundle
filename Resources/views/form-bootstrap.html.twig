@@ -226,9 +226,9 @@
             {% set label = name|humanize %}
         {% endif %}
         {% if type is defined and type == 'submit' %}
-            {% set attr = attr|merge({ 'class': (attr.class|default('') ~ ' btn btn-'~button_class|default('primary'))|trim }) %}
+            {% set attr = attr|merge({ 'class': (attr.class|default('') ~ ' btn')|trim }) %}
         {% else %}
-            {% set attr = attr|merge({ 'class': (attr.class|default('') ~ ' btn btn-'~button_class|default('default'))|trim }) %}
+            {% set attr = attr|merge({ 'class': (attr.class|default('') ~ ' btn')|trim }) %}
         {% endif %}
         {% if as_link is defined and as_link == true %}
             <a {{ block('button_attributes') }}>{% if attr.icon is defined and attr.icon != '' %}<i class="{{ attr.icon }}" aria-hidden="true"></i> {% endif %}{{ label|trans({}, translation_domain) }}</a>
